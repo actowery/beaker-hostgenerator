@@ -2,7 +2,7 @@ require 'beaker-hostgenerator/data'
 require 'beaker-hostgenerator/roles'
 require 'beaker-hostgenerator/hypervisor'
 require 'beaker-hostgenerator/parser'
-
+require 'pry-byebug'
 module BeakerHostGenerator
   class Generator
     include BeakerHostGenerator::Data
@@ -26,7 +26,9 @@ module BeakerHostGenerator
       nodeid = Hash.new(1)
       ostype = nil
       bhg_version = options[:osinfo_version] || 0
-
+      binding.pry
+      # we will list our available preloaded images here for reference
+      available_preloads = { :centos7 => ['2018.1.15'] }
       tokens.each do |token|
         if is_ostype_token?(token, bhg_version)
           if nodeid[ostype] == 1 and ostype != nil
